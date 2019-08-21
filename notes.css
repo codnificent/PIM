@@ -43,3 +43,115 @@ input[type='checkbox'] {
 .note-toggle:checked + .note-btn-toggle + .note-collapsible-content {
   max-height: 100%;
 }
+.note-content-inner{
+  margin: 2%;
+  text-align: center;
+}
+
+/* Form styles */
+textarea {
+  display: block;
+  border-radius: 0.4rem;
+  padding: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+textarea,
+form select {
+  background: #fff;
+  border: 1px solid #e60000;
+}
+
+form select, 
+form button {
+  display: inline-block;
+  margin: 2rem 1rem 0 0;
+  height: 2rem;
+}
+
+#formAddButton {
+  width: 7rem;
+  background-color: #e60000;
+  color: #fff;
+  border-radius: 0.4rem;
+  border: 0;
+  transition: background-color .2s ease-in-out;
+  -webkit-transition: background-color .2s ease-in-out;
+}
+
+#formAddButton:hover {
+  cursor: pointer;
+  background-color: green;
+}
+
+
+/* Note Styles */
+#notes {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+}
+
+.note {
+  width: 24rem;
+  height: 20rem;
+  font-size: 1rem;
+  background: #fff;
+  border-radius: 0.4rem;
+  padding: 1.2rem 1.6rem;
+  margin: 2.4rem 2.4rem 0 0;
+  box-shadow: 0 0.9rem 1.2rem rgba(0,0,0, 0.1);
+  position: relative;
+}
+
+.note-text {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.note::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0.8rem;
+  border-radius: 0 0 0.4rem 0.4rem;
+}
+.note::first-line {
+  font-weight: bold;
+}
+
+.note.red::after {
+  background-color: lightcoral;
+}
+
+.note.blue::after {
+  background-color: lightskyblue;
+}
+.note.green::after {
+  background-color: lightgreen;
+}
+.note.yellow::after {
+  background-color: gold;
+}
+
+.note span {
+  position: absolute;
+  padding-top: 4px;
+  width: 2rem;
+  height: 1.6rem;
+  top: 0.2rem;
+  right: 0.2rem;
+  border-radius: 0.4rem;
+  color: #999;
+  text-align: center;
+}
+
+.note span:hover {
+  color: #fff;
+  background: #e60000;
+  cursor: pointer;
+}

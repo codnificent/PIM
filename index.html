@@ -26,6 +26,7 @@
       <div class="time-collapsible-content">
         <div class="time-content-inner">
           <main>
+          	<h3 style="text-align: center;">PRODUCTIVITY TIMER</h3>
 		    <div id="timeArea">
 			   <div class="topText">
 				  <p id="beastMode"></p>
@@ -111,6 +112,20 @@
       <label for="note-collapsible" class="note-btn-toggle">MANAGE NOTES</label>
       <div class="note-collapsible-content">
         <div class="note-content-inner">
+        	<h3>START TAKING NOTES</h3>
+            <form>
+                <textarea name="formNoteText" id="formNoteText" cols="50" rows="8"></textarea>
+                <select name="formColor" id="formColor">
+                <option value="none">Select color</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="yellow">Yellow</option>
+              </select>
+              <button id="formAddButton">ADD NOTE</button>
+            </form>
+
+            <div id="notes"></div>
         	
 		</div>
       </div>
@@ -118,6 +133,9 @@
 
 
 	<script src="idb.js"></script>
-	<script src="app.js"></script>
+	<script src="time.js"></script>
+	<script src="tasks.js"></script>
+	<script src="notes.js"></script>
+	<script src="passwords.js"></script>
 </body>
 </html>
