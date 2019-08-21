@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="X-UA-Compatible"content = "ie=edge">
+	<meta name="theme-color" content="#f9f9f9"/>
+	<title>Personal Information Manager</title>
+	<link rel="manifest" href="manifest.json">
+	<link rel="stylesheet" href="time.css">
+	<link rel="stylesheet" href="passwords.css">
+	<link rel="stylesheet" href="notes.css">
+	<link rel="stylesheet" href="tasks.css">
+</head>
+<body>
+	<div id="header">
+		<br>
+		<p class="headerTitle"> <b>PERSONAL INFO MANAGER</b></p>
+	</div>
+	<br>
+
+<!-- TIME -->
+	<div class="time-wrap-collabsible">
+      <input id="time-collapsible" class="time-toggle" type="checkbox">
+      <label for="time-collapsible" class="time-btn-toggle">MANAGE TIME</label>
+      <div class="time-collapsible-content">
+        <div class="time-content-inner">
+          <main>
+		    <div id="timeArea">
+			   <div class="topText">
+				  <p id="beastMode"></p>
+			
+			       <button id="resetBtn">Update</button>
+			    </div>
+			    <p id="tomatoImage">
+				  <img src="images/tomato192.png" alt="Tomato Image" width="20px" height="20px">
+			    </p> 
+			    <h1 class ="time">25:00</h1>
+			    <button id="functionalityBtn">START!</button> 
+		    </div>
+
+		    <div id="workAndBreak">
+			    <div id="workTime">
+				    <p class="workText">Work Time</p>
+				    <div id="workBox">
+					    <button id="work-minus">-</button>
+					    <p id="work-Min">25</p>
+					    <button id="work-plus">+</button>
+				    </div>
+			    </div>
+			
+			    <div id="breakTime">
+				    <p class="breakText">Break Time</p>
+				    <div id="breakBox">
+					    <button id="break-minus">-</button>
+					    <p id="break-Min">5</p>
+					    <button id="break-plus">+</button>
+				    </div>
+				</div>
+			</div>
+		    <div id="todaysTomatoes">
+			   <p>Your tomatoes today: <span id="tomatoes"></span></p>
+			   <button id="clearTomatoes">Clear Tomatoes</button>
+		    </div>
+		    <br>
+		    <br>
+		    <div style="text-align: center;">
+		    	<button id="answer">How to use</button>
+		    </div>
+		    <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">×</span>
+                    <p>This time manager is used to boost productivity. All that needs to be done is to set a working time and keep to it until an alerm goes on. Then you can rest based on the break time you set. After each rest, a tomato is earned. Each tomato earned can as well be substituted for any thing else like checking on social media statuses. ENJOY!</p>
+                </div>
+            </div>
+	      </main>
+		</div>
+      </div>
+    </div>
+    <br>
+
+<!-- TASKS -->
+    <div class="task-wrap-collabsible">
+      <input id="task-collapsible" class="task-toggle" type="checkbox">
+      <label for="task-collapsible" class="task-btn-toggle">MANAGE TASKS</label>
+      <div class="task-collapsible-content">
+        <div class="task-content-inner">
+
+		</div>
+      </div>
+    </div>
+    <br>
+
+<!-- PASSWORDS -->
+
+    <div class="password-wrap-collabsible">
+      <input id="password-collapsible" class="password-toggle" type="checkbox">
+      <label for="password-collapsible" class="password-btn-toggle">MANAGE PASSWORDS</label>
+      <div class="password-collapsible-content">
+        <div class="password-content-inner">
+        	
+		</div>
+      </div>
+    </div>
+    <br>
+<!-- NOTES -->
+
+    <div class="note-wrap-collabsible">
+      <input id="note-collapsible" class="note-toggle" type="checkbox">
+      <label for="note-collapsible" class="note-btn-toggle">MANAGE NOTES</label>
+      <div class="note-collapsible-content">
+        <div class="note-content-inner">
+        	
+		</div>
+      </div>
+    </div>
+
+
+	<script src="idb.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>
