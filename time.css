@@ -14,14 +14,15 @@ body{
   color: #ffffff;
   padding: 16px 6px 16px 6px;
   vertical-align: center;
-  letter-spacing: 6px;
+  letter-spacing: 2px;
 
+}
+h2{
+  font-weight: 400;
+  font-size: 18px;
 }
 .time-wrap-collabsible {
   margin-bottom: 1.2rem 0;
-}
-input[type='checkbox'] {
-  display: none;
 }
 .time-btn-toggle {
   display: block;

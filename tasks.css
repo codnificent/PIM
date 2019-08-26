@@ -1,9 +1,6 @@
 .task-wrap-collabsible {
   margin-bottom: 1.2rem 0;
 }
-input[type='checkbox'] {
-  display: none;
-}
 .task-btn-toggle {
   display: block;
   font-weight: bold;
@@ -60,16 +57,12 @@ li, h3 {
   clear:both;
   list-style:none;
 }
-input, button {
-  outline: none;
-}
-.add, .delete, .edit {
+.delete, .edit {
   background: none;
   border: 0px;
   color: #888;
   font-size: 15px;
   width: 60px;
-  margin: 10px 0 0;
   font-family: Lato, sans-serif;
   cursor: pointer;
 }
@@ -87,6 +80,20 @@ label[for='new-task'] {
   margin: 0;
   text-transform: uppercase;
 }
+
+#justAdd{
+  height: 30px;
+  color: #fff;
+  background: #888;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  border: none;
+  margin: 10px 0 0;
+}
+
 input[type="text"] {
   margin: 0;
   font-size: 18px;
@@ -110,7 +117,7 @@ label[for='new-task'] {
 }
 input#new-task {
   float: left;
-  width: 318px;
+  width: 380px;
 }
 p > button:hover {
   color: #0FC57C;
@@ -121,11 +128,6 @@ li {
   overflow: hidden;
   padding: 20px 0;
   border-bottom: 1px solid #eee;
-}
-li > input[type="checkbox"] {
-  margin: 0 10px;
-  position: relative;
-  top: 15px;
 }
 li > label {
   font-size: 18px;
@@ -157,4 +159,10 @@ ul li.editMode input[type=text] {
 
 ul li.editMode label {
   display:none;
+}
+
+@media screen and (max-width: 401px) {
+  container{
+    min-width: 200px;
+  }
 }

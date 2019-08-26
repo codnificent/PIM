@@ -1,9 +1,6 @@
 .note-wrap-collabsible {
   margin-bottom: 1.2rem 0;
 }
-input[type='checkbox'] {
-  display: none;
-}
 .note-btn-toggle {
   display: block;
   font-weight: bold;
@@ -154,4 +151,10 @@ form button {
   color: #fff;
   background: #e60000;
   cursor: pointer;
+}
+
+@media screen and (max-width: 401px) {
+  .note-content-inner{
+    min-width: 200px;
+  }
 }
