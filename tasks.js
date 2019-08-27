@@ -19,17 +19,12 @@ var createNewTaskElement=function(taskString){
   label.innerText=taskString;
   //Each elements, needs appending
   checkBox.type="checkbox";
-  editInput.type="text";
-  editButton.innerText="Edit";//innerText encodes special characters, HTML does not.
-  editButton.className="edit";
   deleteButton.innerText="Delete";
   deleteButton.className="delete";
 
   //and appending.
   listItem.appendChild(checkBox);
   listItem.appendChild(label);
-  listItem.appendChild(editInput);
-  listItem.appendChild(editButton);
   listItem.appendChild(deleteButton);
   return listItem;
 }
@@ -41,26 +36,6 @@ var addTask=function(){
   incompleteTaskHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
   taskInput.value="";
-}
-
-//Edit an existing task.
-var editTask=function(){
-  console.log("Edit Task...");
-  console.log("Change 'edit' to 'save'");
-  var listItem=this.parentNode;
-  var editInput=listItem.querySelector('input[type=text]');
-  var label=listItem.querySelector("label");
-  var containsClass=listItem.classList.contains("editMode");
-  //If class of the parent is .editmode
-  if(containsClass){
-    //switch to .editmode
-    //label becomes the inputs value.
-      label.innerText=editInput.value;
-    }else{
-      editInput.value=label.innerText;
-    }
-    //toggle .editmode on the parent.
-    listItem.classList.toggle("editMode");
 }
 
 //Delete task.
@@ -93,16 +68,12 @@ var taskIncomplete=function(){
 
 //The glue to hold it all together.
 //Set the click handler to the addTask function.
-addButton.onclick=addTask;
 addButton.addEventListener("click",addTask);
 var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
  //select ListItems children
   var checkBox=taskListItem.querySelector("input[type=checkbox]");
-  var editButton=taskListItem.querySelector("button.edit");
   var deleteButton=taskListItem.querySelector("button.delete");
 
-  //Bind editTask to edit button.
-  editButton.onclick=editTask;
   //Bind deleteTask to delete button.
   deleteButton.onclick=deleteTask;
   //Bind taskCompleted to checkBoxEventHandler.

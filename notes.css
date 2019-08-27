@@ -66,6 +66,9 @@ form button {
   margin: 2rem 1rem 0 0;
   height: 2rem;
 }
+#formNoteText{
+  min-width: 400px;
+}
 
 #formAddButton {
   width: 7rem;
@@ -153,8 +156,17 @@ form button {
   cursor: pointer;
 }
 
-@media screen and (max-width: 401px) {
+@media screen and (max-width: 500px) {
   .note-content-inner{
+    max-width: 100vw;
+  }
+  #formNoteText{
     min-width: 200px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  #formNoteText{
+    min-width: 100px;
   }
 }
