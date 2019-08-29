@@ -1,94 +1,97 @@
 var taskInput=document.getElementById("new-task");//Add a new task.
 var addButton=document.getElementById("justAdd");//Add Button
 var incompleteTaskHolder=document.getElementById("incomplete-tasks");//ul of #incomplete-tasks
-var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
+var value; //This makes the task globally available
 
-//New task list item
-var createNewTaskElement=function(taskString){
-  var listItem=document.createElement("li");
-  //input (checkbox)
-  var checkBox=document.createElement("input");//checkbx
-  //label
-  var label=document.createElement("label");//label
-  //input (text)
-  var editInput=document.createElement("input");//text
-  //button.edit
-  var editButton=document.createElement("button");//edit button
-  //button.delete
-  var deleteButton=document.createElement("button");//delete button
-  label.innerText=taskString;
-  //Each elements, needs appending
-  checkBox.type="checkbox";
-  deleteButton.innerText="Delete";
-  deleteButton.className="delete";
+//INDEXED DB 
+var request = indexedDB.open("manager");
+request.onupgradeneeded = function() {
+  // The database did not previously exist, so create object stores and indexes.
+  var db = request.result;
+  var store = db.createObjectStore("tasks", {autoIncrement:true});
+};
 
-  //and appending.
-  listItem.appendChild(checkBox);
-  listItem.appendChild(label);
-  listItem.appendChild(deleteButton);
-  return listItem;
-}
-
+ // ADD TO INDEXED
 var addTask=function(){
-  //Create a new list item with the text from the #new-task:
-  var listItem=createNewTaskElement(taskInput.value);
-  //Append listItem to incompleteTaskHolder
-  incompleteTaskHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  db = request.result;
+  var tx = db.transaction("tasks", "readwrite");
+  var store = tx.objectStore("tasks");
+  store.put(taskInput.value);
   taskInput.value="";
+  displayUI();
 }
 
-//Delete task.
-var deleteTask=function(){
-    console.log("Delete Task...");
-    var listItem=this.parentNode;
-    var ul=listItem.parentNode;
-    //Remove the parent list item from the ul.
-    ul.removeChild(listItem);
+//FUNCTION TO DISPLAY UI
+var displayUI = function(){
+  db = request.result;
+  var tx = db.transaction("tasks", "readwrite");
+  var store = tx.objectStore("tasks");
+
+  incompleteTaskHolder.innerHTML = "";
+  let dbTasks = store.openCursor();
+  // called for each task found by the cursor
+  dbTasks.onsuccess = function() {
+    let cursor = dbTasks.result;
+    if (cursor) {
+      var key = cursor.key; // task key (id field)
+      value = cursor.value; // task object
+      //New task list item
+      var createNewTaskElement=function(taskString){
+        var listItem=document.createElement("li");
+        //label
+        var label=document.createElement("label");//label
+        //button.delete
+        var deleteButton=document.createElement("button");//delete button
+        label.innerText=taskString;
+        //Each elements, needs appending
+        deleteButton.innerText="Delete";
+        deleteButton.className="delete";
+        deleteButton.id = key;
+        deleteButton.onclick = function(){
+          db = request.result;
+          var tx = db.transaction("tasks", "readwrite");
+          var store = tx.objectStore("tasks");
+          let doneTask = store.openCursor();
+          // called for each task found by the cursor
+          doneTask.onsuccess = function(event) {
+            let cursor = event.target.result;
+            if (cursor) {
+              var deleteKey = cursor.key; // task key (id field)
+              var deleteValue = cursor.value;
+    
+              if (deleteKey == deleteButton.id) {
+                var request = cursor.delete();
+                request.onsuccess = function() {
+                  console.log(deleteValue + " " + " is completed and erased from database");
+                };
+              }else{
+                return;
+              }
+              cursor.continue();
+            }else {
+              return;         
+            }
+          }
+          displayUI();
+        }
+        //and appending.
+        listItem.appendChild(label);
+        listItem.appendChild(deleteButton);
+        return listItem;
+      }
+
+      //Create a new list item with the text from the #new-task:
+      var listItem=createNewTaskElement(value);
+      //Append listItem to incompleteTaskHolder
+      incompleteTaskHolder.appendChild(listItem);
+      cursor.continue();
+    }else {
+      tx.oncomplete = function() {
+        return;
+      };
+    } 
+  };
 }
 
-//Mark task completed
-var taskCompleted=function(){
-  console.log("Complete Task..."); 
-  //Append the task list item to the #completed-tasks
-  var listItem=this.parentNode;
-  completedTasksHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskIncomplete);
-}
-
-var taskIncomplete=function(){
-  console.log("Incomplete Task...");
-  //Mark task as incomplete.
-  //When the checkbox is unchecked
-  //Append the task list item to the #incomplete-tasks.
-  var listItem=this.parentNode;
-  incompleteTaskHolder.appendChild(listItem);
-  bindTaskEvents(listItem,taskCompleted);
-}
-
-//The glue to hold it all together.
 //Set the click handler to the addTask function.
 addButton.addEventListener("click",addTask);
-var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
- //select ListItems children
-  var checkBox=taskListItem.querySelector("input[type=checkbox]");
-  var deleteButton=taskListItem.querySelector("button.delete");
-
-  //Bind deleteTask to delete button.
-  deleteButton.onclick=deleteTask;
-  //Bind taskCompleted to checkBoxEventHandler.
-  checkBox.onchange=checkBoxEventHandler;
-}
-
-//cycle over incompleteTaskHolder ul list items
-//for each list item
-for (var i=0; i<incompleteTaskHolder.children.length;i++){
-  //bind events to list items chldren(tasksCompleted)
-  bindTaskEvents(incompleteTaskHolder.children[i],taskCompleted);
-}
-
-//cycle over completedTasksHolder ul list items
-for (var i=0; i<completedTasksHolder.children.length;i++){
-  //bind events to list items chldren(tasksIncompleted)
-  bindTaskEvents(completedTasksHolder.children[i],taskIncomplete);
-}

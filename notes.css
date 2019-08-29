@@ -54,13 +54,11 @@ textarea {
   margin-right: auto;
 }
 
-textarea,
-form select {
+textarea {
   background: #fff;
   border: 1px solid #e60000;
 }
-
-form select, 
+ 
 form button {
   display: inline-block;
   margin: 2rem 1rem 0 0;
@@ -71,7 +69,9 @@ form button {
 }
 
 #formAddButton {
-  width: 7rem;
+  width: 6rem;
+  margin-top: 15px;
+  height: 25px;
   background-color: #e60000;
   color: #fff;
   border-radius: 0.4rem;
@@ -88,27 +88,28 @@ form button {
 
 /* Note Styles */
 #notes {
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: 2rem;
+  margin: auto;
+  width: 90%;
+
 }
 
 .note {
-  width: 24rem;
+  max-width: 100%;
   height: 20rem;
   font-size: 1rem;
   background: #fff;
-  border-radius: 0.4rem;
-  padding: 1.2rem 1.6rem;
-  margin: 2.4rem 2.4rem 0 0;
-  box-shadow: 0 0.9rem 1.2rem rgba(0,0,0, 0.1);
-  position: relative;
+  border-radius: 6px;
+  padding: 30px 20px 40px;
+  margin: 10px 0 30px 0;
+  box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
 }
 
-.note-text {
+.note-text{
   height: 100%;
   overflow-y: auto;
   overflow-x: auto;
+  margin-bottom: 8px;
+  text-align: left;
 }
 
 .note::after {
@@ -120,34 +121,18 @@ form button {
   height: 0.8rem;
   border-radius: 0 0 0.4rem 0.4rem;
 }
-.note::first-line {
+.note-text::first-line {
   font-weight: bold;
 }
 
-.note.red::after {
-  background-color: lightcoral;
-}
-
-.note.blue::after {
-  background-color: lightskyblue;
-}
-.note.green::after {
-  background-color: lightgreen;
-}
-.note.yellow::after {
-  background-color: gold;
-}
-
 .note span {
-  position: absolute;
-  padding-top: 4px;
-  width: 2rem;
-  height: 1.6rem;
-  top: 0.2rem;
-  right: 0.2rem;
-  border-radius: 0.4rem;
-  color: #999;
-  text-align: center;
+  font-weight: 700;
+  padding: 6px;
+  margin: 10px;
+  width: 30px;
+  height: 30px;
+  color: #e60000;
+  border-radius: 4px;
 }
 
 .note span:hover {
@@ -169,4 +154,27 @@ form button {
   #formNoteText{
     min-width: 100px;
   }
+}
+
+@media screen and (max-width: 700px) and (min-width: 601px){
+  #notes{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "a b";
+  }
+  .note{
+   margin: 12px;
+  }
+}
+
+@media screen and (min-width:701px){
+   #notes{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "a b";
+    max-width: 980px;
+  }
+  .note{
+     margin: 16px;
+   }
 }

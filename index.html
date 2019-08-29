@@ -11,10 +11,10 @@
 	<link rel="stylesheet" href="notes.css">
 	<link rel="stylesheet" href="tasks.css">
 </head>
-<body>
+<body onload="displayUI(), displayNotes()">
 	<div id="header">
 		<br>
-		<p class="headerTitle"> <b> KINGSLEY'S PERSONAL INFO MANAGER</b></p>
+		<p class="headerTitle"> <b>PERSONAL INFO MANAGER</b></p>
 	</div>
 	<br>
 
@@ -98,12 +98,7 @@
 
               <h3 style="text-align: center;">Tasks</h3>
               <ul id="incomplete-tasks">
-                <li><input type="checkbox"><label>Defend Project</label><input type="text"><button class="delete">Delete</button></li>
-              </ul>
-      
-              <h3 style="text-align: center;">Completed</h3>
-              <ul id="completed-tasks">
-                <li><input type="checkbox" checked><label>Write Project</label><input type="text"><button class="delete">Delete</button></li>
+                
               </ul>
             </div>
 		</div>
@@ -119,28 +114,18 @@
       <div class="note-collapsible-content">
         <div class="note-content-inner">
         	<h2>START TAKING NOTES</h2>
-            <form>
-                <textarea name="formNoteText" id="formNoteText" rows="8"></textarea>
-                <select name="formColor" id="formColor">
-                <option value="none">Select color</option>
-                <option value="red">Red</option>
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-                <option value="yellow">Yellow</option>
-              </select>
-              <button id="formAddButton">ADD NOTE</button>
-            </form>
+            <textarea name="formNoteText" id="formNoteText" rows="8"></textarea>
+            <button id="formAddButton">SAVE NOTE</button>
 
-            <div id="notes"></div>
+            <div id="notes">
+            	
+            </div>
         	
 		</div>
       </div>
     </div>
-
-
-	<script src="idb.js"></script>
-	<script src="time.js"></script>
 	<script src="tasks.js"></script>
 	<script src="notes.js"></script>
+	<script src="time.js"></script>
 </body>
 </html>
