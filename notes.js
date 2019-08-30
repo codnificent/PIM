@@ -2,7 +2,6 @@ var noteValue; //This note the task globally available
 noteText = document.getElementById("formNoteText");
 addNoteButton = document.getElementById("formAddButton");
 var notes = document.getElementById('notes');
-noteText.focus();
 
 //INDEXED DB 
 var noteRequest = indexedDB.open("Notes Store");
@@ -19,7 +18,6 @@ function addNote() {
   var store = tx.objectStore("notes");
   store.put(noteText.value);
   noteText.value = '';
-  console.log(noteText.value);
   displayNotes();
 }
 
@@ -49,35 +47,14 @@ var displayNotes = function(){
         deleteNoteButton.classList.add('note-delete');
         deleteNoteButton.innerHTML = 'X';
 
-        noteText.focus();
-
         deleteNoteButton.id = key;
         deleteNoteButton.onclick = function(){
-          console.log(deleteNoteButton.key);
+          console.log(deleteNoteButton.id);
           db = noteRequest.result;
           var tx = db.transaction("notes", "readwrite");
           var store = tx.objectStore("notes");
-          let donenote = store.openCursor();
-          // called for each note found by the cursor
-          donenote.onsuccess = function(event) {
-            let cursor = event.target.result;
-            if (cursor) {
-              var deleteKey = cursor.key; // note key (id field)
-              var deleteValue = cursor.value;
-    
-              if (deleteKey == deleteNoteButton.id) {
-                var noteRequest = cursor.delete();
-                noteRequest.onsuccess = function() {
-                  console.log(deleteValue + " " + " is completed and erased from database");
-                };
-              }else{
-                return;
-              }
-              cursor.continue();
-            }else {
-              return;         
-            }
-          }
+          var intId = parseInt(deleteNoteButton.id);
+          store.delete(intId);
           displayNotes();
         }
         //and appending.

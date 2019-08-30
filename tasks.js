@@ -51,27 +51,8 @@ var displayUI = function(){
           db = request.result;
           var tx = db.transaction("tasks", "readwrite");
           var store = tx.objectStore("tasks");
-          let doneTask = store.openCursor();
-          // called for each task found by the cursor
-          doneTask.onsuccess = function(event) {
-            let cursor = event.target.result;
-            if (cursor) {
-              var deleteKey = cursor.key; // task key (id field)
-              var deleteValue = cursor.value;
-    
-              if (deleteKey == deleteButton.id) {
-                var request = cursor.delete();
-                request.onsuccess = function() {
-                  console.log(deleteValue + " " + " is completed and erased from database");
-                };
-              }else{
-                return;
-              }
-              cursor.continue();
-            }else {
-              return;         
-            }
-          }
+          var taskId = parseInt(deleteButton.id);
+          store.delete(taskId);
           displayUI();
         }
         //and appending.

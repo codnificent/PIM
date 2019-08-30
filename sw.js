@@ -1,7 +1,6 @@
 const CACHE_NAME = 'cache_v1';
 let urlsToCache = [
   'index.html',
-  'idb.js',
   'notes.css',
   'notes.js',
   'tasks.css',
