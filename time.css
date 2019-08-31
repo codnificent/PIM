@@ -298,6 +298,17 @@ h2{
 }
 
 
+footer{
+  text-align: center;
+  background: linear-gradient(#ff8000, #ffb833);
+  color: #ffffff;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  padding: 10px 6px 10px 6px;
+  letter-spacing: 1px;
+
+}
 @media screen and (min-width: 600px) {
   main{
     max-width: 800px;

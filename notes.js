@@ -45,7 +45,7 @@ var displayNotes = function(){
         note.classList.add('note');
         innerNoteText.innerHTML = noteString;
         deleteNoteButton.classList.add('note-delete');
-        deleteNoteButton.innerHTML = 'X';
+        deleteNoteButton.innerHTML = 'DELETE';
 
         deleteNoteButton.id = key;
         deleteNoteButton.onclick = function(){

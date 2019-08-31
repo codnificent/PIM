@@ -56,7 +56,7 @@ textarea {
 
 textarea {
   background: #fff;
-  border: 1px solid #e60000;
+  border: 1px solid #888;
 }
  
 form button {
@@ -71,8 +71,8 @@ form button {
 #formAddButton {
   width: 6rem;
   margin-top: 15px;
-  height: 25px;
-  background-color: #e60000;
+  height: 30px;
+  background-color: #888;
   color: #fff;
   border-radius: 0.4rem;
   border: 0;
