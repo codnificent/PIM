@@ -315,6 +315,10 @@ footer{
   #header {
     text-align: center;
   }
+  .time-wrap-collabsible {
+    max-width: 80vw;
+    margin: auto;
+  }
 
   .topText{
     grid-gap: 70%;
