@@ -1,7 +1,7 @@
 {
   "short_name": "PIM",
   "name": "PERSONAL INFO MANAGER",
-   "description": "This is a very simple web app that helps me manage my time and personal info",
+   "description": "This is a very simple web app that helps in managing time and personal info",
   "icons": [
     {
       "src": "images/tomato192.png",
