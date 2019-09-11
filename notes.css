@@ -122,6 +122,7 @@ form button {
 }
 .note-text::first-line {
   font-weight: bold;
+  line-height: 25px;
 }
 
 .note span {

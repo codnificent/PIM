@@ -13,12 +13,16 @@ noteRequest.onupgradeneeded = function() {
 
 // Functions
 function addNote() {
+ if (noteText.value == "") {
+  window.alert("Sorry. You cannot add an empty note.");
+ }else{
   db = noteRequest.result;
   var tx = db.transaction("notes", "readwrite");
   var store = tx.objectStore("notes");
   store.put(noteText.value);
   noteText.value = '';
   displayNotes();
+ }
 }
 
 var displayNotes = function(){
@@ -49,13 +53,17 @@ var displayNotes = function(){
 
         deleteNoteButton.id = key;
         deleteNoteButton.onclick = function(){
-          console.log(deleteNoteButton.id);
-          db = noteRequest.result;
-          var tx = db.transaction("notes", "readwrite");
-          var store = tx.objectStore("notes");
-          var intId = parseInt(deleteNoteButton.id);
-          store.delete(intId);
-          displayNotes();
+          //console.log(deleteNoteButton.id);
+          if (window.confirm("Are you sure you want to delete this note?")) {
+            db = noteRequest.result;
+            var tx = db.transaction("notes", "readwrite");
+            var store = tx.objectStore("notes");
+            var intId = parseInt(deleteNoteButton.id);
+            store.delete(intId);
+            displayNotes();
+          }else{
+            return;
+          }
         }
         //and appending.
         notes.appendChild(note);

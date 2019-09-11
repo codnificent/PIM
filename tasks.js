@@ -12,13 +12,17 @@ request.onupgradeneeded = function() {
 };
 
  // ADD TO INDEXED
-var addTask=function(){
+var addTask = function(){
+  if (taskInput.value == "") {
+    window.alert("Sorry. You cannot add an empty task.");
+  }else{
   db = request.result;
   var tx = db.transaction("tasks", "readwrite");
   var store = tx.objectStore("tasks");
   store.put(taskInput.value);
-  taskInput.value="";
+  taskInput.value = "";
   displayUI();
+  }
 }
 
 //FUNCTION TO DISPLAY UI
@@ -48,12 +52,16 @@ var displayUI = function(){
         deleteButton.className="delete";
         deleteButton.id = key;
         deleteButton.onclick = function(){
-          db = request.result;
-          var tx = db.transaction("tasks", "readwrite");
-          var store = tx.objectStore("tasks");
-          var taskId = parseInt(deleteButton.id);
-          store.delete(taskId);
-          displayUI();
+          if (window.confirm("Are you sure you want to delete this task?")) {
+            db = request.result;
+            var tx = db.transaction("tasks", "readwrite");
+            var store = tx.objectStore("tasks");
+            var taskId = parseInt(deleteButton.id);
+            store.delete(taskId);
+            displayUI();
+          }else{
+            return;
+          }
         }
         //and appending.
         listItem.appendChild(label);
