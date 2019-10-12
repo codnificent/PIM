@@ -2,6 +2,7 @@ var taskInput=document.getElementById("new-task");//Add a new task.
 var addButton=document.getElementById("justAdd");//Add Button
 var incompleteTaskHolder=document.getElementById("incomplete-tasks");//ul of #incomplete-tasks
 var value; //This makes the task globally available
+var reminderTime;
 
 //INDEXED DB 
 var request = indexedDB.open("manager");
@@ -44,9 +45,42 @@ var displayUI = function(){
         var listItem=document.createElement("li");
         //label
         var label=document.createElement("label");//label
-        //button.delete
-        var deleteButton=document.createElement("button");//delete button
         label.innerText=taskString;
+
+        let reminder = document.createElement("label");
+        reminder.innerText = "Reminder not set";
+        let reminderButton = document.createElement("Button");
+        reminderButton.className = "enable";
+        reminderButton.textContent = "Enable";
+        let reminderFunction;
+                 
+        reminderButton.onclick = function(){
+          if(reminderButton.textContent == "Enable"){ 
+            let promptReminderTime = prompt("Set the minutes for the reminder", "0");
+            reminderTime = parseInt(promptReminderTime, "10");
+            reminder.innerText = `Reminder set for ${reminderTime} Mins`;
+
+            reminderFunction = window.setInterval(function(){
+              reminderTime--;
+              reminder.innerText = `Reminder set for ${reminderTime} Mins`;
+              if(reminderTime <= 0){
+                console.log("This is cool");
+                window.clearInterval(reminderFunction);
+                reminder.innerText = `Do this task now`;
+                alert.play();
+                window.alert("Hey, you've got important task to complete");
+              }
+            }, 60000);
+            reminderButton.textContent = "Disable";
+            
+          }else{
+            reminder.innerText = "Reminder not set";
+            reminderButton.textContent = "Enable";
+            window.clearInterval(reminderFunction);    
+          }
+        }
+
+        var deleteButton=document.createElement("button");//delete button
         //Each elements, needs appending
         deleteButton.innerText="Delete";
         deleteButton.className="delete";
@@ -66,6 +100,8 @@ var displayUI = function(){
         //and appending.
         listItem.appendChild(label);
         listItem.appendChild(deleteButton);
+        listItem.appendChild(reminder);
+        listItem.appendChild(reminderButton);
         return listItem;
       }
 

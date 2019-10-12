@@ -60,13 +60,27 @@ li, h3 {
 .delete{
   background: none;
   border: 0px;
-  color: #888;
+  color: red;
   font-size: 15px;
   width: 60px;
   font-family: Lato, sans-serif;
   cursor: pointer;
 }
-button:hover {
+.enable{
+  background: none;
+  border: 0px;
+  color: #333;
+  font-size: 15px;
+  width: 60px;
+  font-family: Lato, sans-serif;
+  cursor: pointer;
+}
+
+.enable:hover{
+  color: #000;
+  content: "Enable" !important;
+}
+.delete:hover {
   color: #333;
 }
 /* Heading */
@@ -120,7 +134,7 @@ input#new-task {
   width: 380px;
 }
 p > button:hover {
-  color: #0FC57C;
+  color: #333;
 }
 
 /* Task list */
@@ -139,7 +153,7 @@ li >  input[type="text"] {
   width: 226px;
 }
 li > .delete:hover {
-  color: #CF2323;
+  color: #333;
 }
 
 /* Completed */
